@@ -13,10 +13,10 @@ def create_key(df, n):
     """Cree una nueva columna en el DataFrame que contenga el key de la columna 'text'"""
     df = df.copy()
 
-    df["fingerprint"] = df["text"]
+    df["key"] = df["text"]
 
-    df["fingerprint"] = (
-        df["fingerprint"]
+    df["key"] = (
+        df["key"]
         .str.strip()
         .str.lower()
         .str.translate(str.maketrans("", "", "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"))
@@ -37,16 +37,16 @@ def generate_cleaned_column(df):
     df = df.copy()
 
     # 1. Ordene el dataframe por 'fingerprint' y 'text'
-    df=df.sort_values(by=["fingerprint","text"]).copy()
+    df=df.sort_values(by=["key","text"]).copy()
 
     # 2. Seleccione la primera fila de cada grupo de 'fingerprint'
-    fingerprints=df.groupby("fingerprint").first().reset_index()
+    fingerprints=df.groupby("key").first().reset_index()
 
     # 3.  Cree un diccionario con 'fingerprint' como clave y 'text' como valor
-    fingerprints=fingerprints.set_index("fingerprint")["text"].to_dict()
+    fingerprints=fingerprints.set_index("key")["text"].to_dict()
 
     
-    df["cleaned"]=df["fingerprint"].map(fingerprints)
+    df["cleaned"]=df["key"].map(fingerprints)
     # 4. Cree la columna 'cleaned' usando el diccionario
 
 
