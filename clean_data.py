@@ -1,4 +1,4 @@
-    """Taller evaluable presencial"""
+"""Taller evaluable presencial"""
 
 import pandas as pd
 
