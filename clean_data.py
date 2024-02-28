@@ -35,6 +35,7 @@ def create_key(df, n):
     # Convierta el texto a una lista de tokens
     df["key"] = df["key"].str.split()
 
+    # algoritmo n-gramas
     # Una el texto sin espacios en blanco
     df["key"] = df["key"].str.join("")
    
